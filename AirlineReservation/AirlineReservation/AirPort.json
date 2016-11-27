@@ -1,0 +1,216 @@
+﻿[
+  {
+    "Code": "SGN",
+    "Name": "TP.Hồ Chí Minh",
+    "StationTo": [
+      {
+        "Code": "HAN",
+        "Name": "Hà Nội"
+      },
+      {
+        "Code": "HUI",
+        "Name": "Huế"
+      },
+      {
+        "Code": "VIH",
+        "Name": "Vinh"
+      },
+      {
+        "Code": "VCA",
+        "Name": "Cần Thơ"
+      },
+      {
+        "Code": "SIN",
+        "Name": "Singapore"
+      },
+      {
+        "Code": "BKK",
+        "Name": "Bangkok"
+      },
+      {
+        "Code": "ENG",
+        "Name": "Anh"
+      },
+      {
+        "Code": "FRE",
+        "Name": "Pháp"
+      }
+    ]
+  },
+  {
+    "Code": "HAN",
+    "Name": "Hà Nội",
+    "StationTo": [
+      {
+        "Code": "SGN",
+        "Name": "TP.Hồ Chí Minh"
+      },
+      {
+        "Code": "HUI",
+        "Name": "Huế"
+      },
+      {
+        "Code": "VIH",
+        "Name": "Vinh"
+      },
+      {
+        "Code": "VCA",
+        "Name": "Cần Thơ"
+      },
+      {
+        "Code": "SIN",
+        "Name": "Singapore"
+      },
+      {
+        "Code": "BKK",
+        "Name": "Bangkok"
+      },
+      {
+        "Code": "ENG",
+        "Name": "Anh"
+      },
+      {
+        "Code": "FRE",
+        "Name": "Pháp"
+      }
+    ]
+  },
+  {
+    "Code": "VIH",
+    "Name": "Vinh",
+    "StationTo": [
+      {
+        "Code": "SGN",
+        "Name": "TP.Hồ Chí Minh"
+      },
+      {
+        "Code": "HUI",
+        "Name": "Huế"
+      },
+      {
+        "Code": "HAN",
+        "Name": "Hà Nội"
+      }
+    ]
+  },
+  {
+    "Code": "HUI",
+    "Name": "Huế",
+    "StationTo": [
+      {
+        "Code": "SGN",
+        "Name": "TP.Hồ Chí Minh"
+      },
+      {
+        "Code": "VIH",
+        "Name": "Vinh"
+      },
+      {
+        "Code": "HAN",
+        "Name": "Hà Nội"
+      }
+    ]
+  },
+  {
+    "Code": "DAN",
+    "Name": "Đà Nẵng",
+    "StationTo": [
+      {
+        "Code": "SGN",
+        "Name": "TP.Hồ Chí Minh"
+      },
+      {
+        "Code": "VIH",
+        "Name": "Vinh"
+      },
+      {
+        "Code": "HAN",
+        "Name": "Hà Nội"
+      }
+    ]
+  },
+  {
+    "Code": "CXR",
+    "Name": "Nha Trang",
+    "StationTo": [
+      {
+        "Code": "SGN",
+        "Name": "TP.Hồ Chí Minh"
+      },
+      {
+        "Code": "HAN",
+        "Name": "Hà Nội"
+      }
+    ]
+  },
+  {
+    "Code": "VCA",
+    "Name": "Cần Thơ",
+    "StationTo": [
+      {
+        "Code": "SGN",
+        "Name": "TP.Hồ Chí Minh"
+      },
+      {
+        "Code": "HAN",
+        "Name": "Hà Nội"
+      }
+    ]
+  },
+  {
+    "Code": "BKK",
+    "Name": "BangKok",
+    "StationTo": [
+      {
+        "Code": "SGN",
+        "Name": "TP.Hồ Chí Minh"
+      },
+      {
+        "Code": "HAN",
+        "Name": "Hà Nội"
+      }
+    ]
+  },
+  {
+    "Code": "SIN",
+    "Name": "Singapore",
+    "StationTo": [
+      {
+        "Code": "SGN",
+        "Name": "TP.Hồ Chí Minh"
+      },
+      {
+        "Code": "HAN",
+        "Name": "Hà Nội"
+      }
+    ]
+  },
+  {
+    "Code": "ENG",
+    "Name": "Anh",
+    "StationTo": [
+      {
+        "Code": "SGN",
+        "Name": "TP.Hồ Chí Minh"
+      },
+      {
+        "Code": "HAN",
+        "Name": "Hà Nội"
+      }
+    ]
+  },
+  {
+    "Code": "FRE",
+    "Name": "Pháp",
+    "StationTo": [
+      {
+        "Code": "SGN",
+        "Name": "TP.Hồ Chí Minh"
+      },
+      {
+        "Code": "HAN",
+        "Name": "Hà Nội"
+      }
+    ]
+  }
+]

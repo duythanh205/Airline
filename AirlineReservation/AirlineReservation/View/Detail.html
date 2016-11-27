@@ -1,0 +1,132 @@
+﻿<div class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" ng-click="close(false)" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Thông tin chi tiết vé</h4>
+            </div>
+            <div class="modal-body">
+                <!--<p>It's your call...</p>-->
+                <div class="row">
+                    <div class="col-md-12">
+                        <label class="col-md-6 control-label">Mã chuyến bay:  </label>
+                        <label class="col-md-6 control-label" ng-bind="info.FlightID"></label>
+                    </div>
+                    <div class="col-md-12">
+                        <label class="col-md-6 control-label">Nơi đi:  </label>
+                        <label class="col-md-6 control-label" ng-bind="info.Origin"></label>
+                    </div>
+                    <div class="col-md-12">
+                        <label class="col-md-6 control-label">Nơi đến:  </label>
+                        <label class="col-md-6 control-label" ng-bind="info.Destination"></label>
+                    </div>
+                    <div class="col-md-12">
+                        <label class="col-md-6 control-label">Giờ đi:  </label>
+                        <label class="col-md-6 control-label" ng-bind="info.FlightTime"></label>
+                    </div>
+                    <div class="col-md-12">
+                        <label class="col-md-6 control-label">Hạng ghế:  </label>
+                        <label class="col-md-6 control-label" ng-bind="info.SeatClass"></label>
+                    </div>
+                    <div class="col-md-12">
+                        <label class="col-md-6 control-label">Giá ghế:  </label>
+                        <label class="col-md-6 control-label" ng-bind="info.PriceClass"></label>
+                    </div>
+                    <div class="col-md-12">
+                        <label class="col-md-6 control-label">Số lượng ghế đặt:  </label>
+                        <label class="col-md-6 control-label" ng-bind="req.TotalPassengers"></label>
+                    </div>
+                    <div class="col-md-12">
+                        <label class="col-md-6 control-label">Tổng tiền:  </label>
+                        <label class="col-md-6 control-label" ng-bind="info.Price*req.TotalPassengers"></label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-header">
+                <h4 class="modal-title">Thông tin đặt vé</h4>
+            </div>
+            <div class="modal-body">
+
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <label class="control-label col-xs-2">Họ Tên</label>
+                        <div class="col-xs-10">
+                            <input type="text" class="form-control" id="inputEmail" placeholder="Trần Văn A" ng-model="ReqModel.Name">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label  class="control-label col-xs-2">Email</label>
+                        <div class="col-xs-10">
+                            <input type="email" class="form-control" id="inputPassword" placeholder="tranvana@gmail.com" ng-model="ReqModel.Email">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-xs-2">SĐT</label>
+                        <div class="col-xs-10">
+                            <input type="tel" class="form-control" id="inputPassword" placeholder="0123456789" ng-model="ReqModel.Phone">
+                        </div>
+                    </div>
+                    <div class="col-md-12 form-group">
+                        <div class="col-md-6">
+                            <div class="col-xs-offset-2 col-xs-10">
+                                <div class="checkbox">
+                                    <label><input type="checkbox" ng-click="MaleClick()" ng-model="Male"> Nam</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="col-xs-offset-2 col-xs-10">
+                                <div class="checkbox">
+                                    <label><input type="checkbox" ng-click="FemaleClick()" ng-model="Female"> Nữ</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="alert alert-danger form-group" role="alert" ng-if="IsBookingFail">
+                        <span>Đặt hàng thất bại</span>
+                    </div>
+                    <div class="alert alert-success form-group" role="alert" ng-if="IsBookSuccess">
+                        <span>Đặt hàng thành công</span>
+                    </div>
+                </form>
+            </div>
+
+
+
+            <div class="modal-header" ng-if="IsBookSuccess">
+                <h4 class="modal-title">Thông tin đặt hàng</h4>
+            </div>
+
+            <div class="modal-body" ng-if="IsBookSuccess">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <label class="col-sm-6 control-label">Mã đơn hàng:</label>
+                        <div class="col-sm-6">
+                            <p class="form-control-static" ng-bind="Data.departure.bookingCode"></p>
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <label class="col-sm-6 control-label">Mã chuyến bay:</label>
+                        <div class="col-sm-6">
+                            <p class="form-control-static" ng-bind="info.FlightID"></p>
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <label class="col-sm-6 control-label">Giờ bay:</label>
+                        <div class="col-sm-6">
+                            <p class="form-control-static" ng-bind="info.FlightTime"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" ng-click="close(false)" class="btn btn-default" data-dismiss="modal">Đóng</button>
+                <button type="button" ng-click="Book()" class="btn btn-primary" ng-disabled="IsBookSuccess">Đặt hàng</button>
+            </div>
+        </div>
+    </div>
+</div>
+

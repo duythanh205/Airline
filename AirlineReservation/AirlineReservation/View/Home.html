@@ -1,0 +1,334 @@
+﻿<!DOCTYPE html>
+<html ng-app="ailineApp">
+<head>
+    <title>AirlineReservation</title>
+    <meta charset="utf-8" />
+    <script src="../scripts/jquery-1.9.0.min.js"></script>
+    <script src="../scripts/bootstrap.min.js"></script>
+    <script src="../scripts/bootstrap-datepicker.js"></script>
+
+    <script src="../scripts/moment/moment.js"></script>
+    <script src="../scripts/angular.min.js"></script>
+    <script src="../scripts/angular-animate.min.js"></script>
+    <script src="../scripts/angular-sanitize.min.js"></script>
+    <script src="../scripts/angular-route.min.js"></script>
+    <script src="../scripts/angular-messages.min.js"></script>
+    <script src="../scripts/angular-resource.min.js"></script>
+    <script src="../scripts/datetimepicker.js"></script>
+    <script src="../scripts/datetimepicker.templates.js"></script>
+    <script src="../scripts/angular-ui/ui-bootstrap-tpls.min.js"></script>
+    <script src="../scripts/fooTable/dist/footable.all.min.js"></script>
+    <script src="../scripts/angular-footable.min.js"></script>
+    <script src="../scripts/angular-modal-service.js"></script>
+
+
+    <script src="../myScripts/airline-controller.js"></script>
+
+
+    <link href="../Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="../Content/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <link href="../Content/datetimepicker.css" rel="stylesheet" type="text/css" />
+    <link href="../Content/MyStyle.css" rel="stylesheet" type="text/css" />
+    <link href="../scripts/fooTable/css/footable.core.min.css" rel="stylesheet" />
+</head>
+<body ng-controller="airlineController">
+    <div>
+        <div id="homepage_video" class="show-onload hidden-xs" style="height: 325px; opacity: 1;">
+            <div style="z-index: 0" class="banner-content hidden-xs">
+                <div class="container">
+                    <h1 style="color:#fff; text-shadow: 1px 1px 1px #65717d" class="refrigerator">ĐẶT VÉ MÁY BAY, TÀU HỎA, XE KHÁCH VÀ TÀU THỦY <br> TẠI VIỆT NAM, CAMPUCHIA VÀ LÀO</h1>
+                </div>
+            </div>
+
+            <img src="../img/background.jpg">
+            <img class="video visible-xs" src="../img/bk2.jpg">
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <!-- Default panel contents -->
+                <div class="panel-heading">Tìm kiếm chuyến bay</div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">Thông tin tìm chuyến</div>
+                                <div class="panel-body">
+                                    <div class="form-horizontal">
+                                        <div class="form-group">
+                                            <div class="col-sm-12">
+                                                <div class="row">
+                                                    <div class="col-md-5 form-group">
+                                                        <label class="col-sm-3 control-label">Nơi đi</label>
+                                                        <div class="col-sm-9 styled-select">
+                                                            <select ng-model="SearchRequest.AirPortOrigin" class="form-control" ng-change="OriginChange()" ng-init="SearchRequest.AirPortOrigin = 'SGN'">
+                                                                <option ng-selected="{{item.Code == SearchRequest.AirPortOrigin}}"
+                                                                        ng-repeat="item in OriginAirPorts"
+                                                                        value="{{item.Code}}"
+                                                                        ng-bind="item.Name"></option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-5 form-group">
+                                                        <label class="col-sm-3 control-label">Nơi đến</label>
+                                                        <div class="col-sm-9 styled-select">
+                                                            <select ng-model="SearchRequest.AirPortDestination" class="form-control">
+                                                                <option ng-repeat="item in DestinationAirPorts"
+                                                                        ng-selected="{{item.Code == SearchRequest.AirPortDestination}}"
+                                                                        value="{{item.Code}}"
+                                                                        ng-bind="item.Name"></option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-2 form-group pull-right" data-toggle="tab">
+                                                        <button id="btnOneWay" class="OneWayBtn" ng-click="OneWayClick()" ng-class="OneWayTick ? 'btn-danger' : 'btn-primary'">One Way</button>
+                                                    </div>
+                                                </div>
+                                                <hr />
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                        <div class="col-sm-12">
+                                                            <div class="row">
+                                                                <label>Người lớn</label>
+                                                            </div>
+                                                            <div class="row">
+                                                                <button type="button" class="btn-circle fa-minus OneWayBtn" data-value="-1" data-toggle="spinner" ng-click="AdtSubClick()"></button>
+                                                                <input data-ng-value="SearchRequest.Adult" type="text" readonly="readonly" data-ride="spinner" name="adult_count" class="input-number text-center" value="1" data-min="1" data-max="6">
+                                                                <button type="button" class="btn-circle fa-plus OneWayBtn" data-value="1" data-toggle="spinner" data-on="mousehold" ng-click="AdtPlusClick()"></button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4">
+
+                                                        <div class="col-sm-12">
+                                                            <div class="row">
+                                                                <label>Trẻ em</label>
+                                                            </div>
+                                                            <div class="row">
+                                                                <button type="button" class="btn-circle fa-minus OneWayBtn" data-value="-1" data-toggle="spinner" ng-click="ChildSubClick()"></button>
+                                                                <input data-ng-value="SearchRequest.Children" readonly="readonly" type="text" data-ride="spinner" name="child_count" class="input-number text-center" value="1" data-min="1" data-max="6">
+                                                                <button type="button" class="btn-circle fa-plus OneWayBtn" data-value="1" data-toggle="spinner" data-on="mousehold" ng-click="ChildPlusClick()"></button>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="col-md-4">
+
+                                                        <div class="col-sm-12">
+                                                            <div class="row">
+                                                                <label>Em bé</label>
+                                                            </div>
+                                                            <div class="row">
+                                                                <button type="button" class="btn-circle fa-minus OneWayBtn" data-value="-1" data-toggle="spinner" ng-click="InfSubClick()"></button>
+                                                                <input data-ng-value="SearchRequest.Infant" readonly="readonly" type="text" data-ride="spinner" name="infant_count" class="input-number text-center" value="1" data-min="1" data-max="6">
+                                                                <button type="button" class="btn-circle fa-plus OneWayBtn" data-value="1" data-toggle="spinner" data-on="mousehold" ng-click="InfPlusClick()"></button>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="panel panel-default" style="height:281px">
+                                <div class="panel-heading">
+                                    Thời gian
+                                </div>
+                                <div>
+                                    <b>&nbsp;</b>
+                                </div>
+                                <div class="panel-body">
+                                    <div class="form-horizontal">
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label">Ngày đi</label>
+                                            <div class="dropdown col-sm-9">
+                                                <a class="dropdown-toggle" role="button" data-toggle="dropdown" data-target="#" href="javascript:void(0);">
+                                                    <div class="input-group">
+                                                        <input readonly="readonly" type="text" class="form-control" data-ng-value="SearchRequest.DepartureDate | date: 'dd-MM-yyyy'">
+                                                        <span class="input-group-addon">
+                                                            <i class="glyphicon glyphicon-calendar"></i>
+                                                        </span>
+                                                    </div>
+                                                </a>
+                                                <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                                    <datetimepicker data-ng-model="SearchRequest.DepartureDate" id="dtPicker" data-on-set-time="onTimeSet(newDate, oldDate)"
+                                                                    data-datetimepicker-config="{ dropdownSelector: '#ToDate',startView:'day', minView:'day' }"
+                                                                    data-before-render="beforeRenderDepartureDate($view, $dates, $leftDate, $upDate, $rightDate, SearchRequest,
+                                                                'DepartureDate', 'ReturnDate')" />
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <b>&nbsp;</b>
+                                </div>
+                                <div class="panel-body">
+                                    <div class="form-horizontal">
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label">Ngày về</label>
+                                            <div class="dropdown col-sm-9">
+                                                <a class="dropdown-toggle" role="button" data-toggle="dropdown" data-target="#" href="javascript:void(0);">
+                                                    <div class="input-group">
+                                                        <input readonly="readonly" type="text" class="form-control" data-ng-value="SearchRequest.ReturnDate | date: 'dd-MM-yyyy'" ng-disabled="OneWayTick">
+                                                        <span class="input-group-addon">
+                                                            <i class="glyphicon glyphicon-calendar"></i>
+                                                        </span>
+                                                    </div>
+                                                </a>
+                                                <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel" ng-hide="OneWayTick">
+                                                    <datetimepicker data-ng-model="SearchRequest.ReturnDate" data-on-set-time="onTimeSet(newDate, oldDate)"
+                                                                    data-datetimepicker-config="{ dropdownSelector: '#ToDate',startView:'day', minView:'day' }"
+                                                                    data-before-render="beforeRenderReturnDate($view, $dates, $leftDate, $upDate, $rightDate, SearchRequest,'DepartureDate',
+                                                                 'ReturnDate')" />
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="col-sm-8 alert alert-danger pull-left" role="alert" ng-if="isSearchFail">
+                                <p ng-bind="MessageSearchFail"></p>
+                            </div>
+                            <div class="col-sm-4 pull-right">
+                                <button class="btn btn-primary pull-right" ng-click="Search()">
+                                    <i class="fa fa-search" aria-hidden="true"></i>&nbsp; Tìm kiếm
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Table -->
+
+    </div>
+
+    <div class="row" ng-if="isSearch">
+        <div class="col-md-12">
+            <p><b>&nbsp;&nbsp;Kết quả tìm kiếm chuyến bay:</b>&nbsp;<span ng-bind="getStationName(SearchRequest.AirPortOrigin)"></span> - <span ng-bind="getStationName(SearchRequest.AirPortDestination)"></span>  
+               <b>&nbsp;&nbsp;&nbsp;&nbsp;</b>- Lượt đi: <span ng-bind="SearchRequest.DepartureDate | date: 'dd/MM/yyyy'"></span>&nbsp;&nbsp;</p>
+            <table class="table footable table-striped table-hover table-bordered" data-page-size="5">
+                <thead>
+                    <tr style="background-color:#f5f5f5">
+                        <th data-sort-ignore="false" data-type="numeric" data-sort-initial="true" class="text-center" style="width:5px">STT</th>
+                        <th data-sort-ignore="false" data-type="alpha" class="text-center" style="width:100px">Mã chuyến bay</th>
+                        <th data-sort-ignore="false" data-type="alpha" class="text-center v-m" style="width:100px">Nơi đi</th>
+                        <th data-sort-ignore="false" data-type="alpha" class="text-center v-m" style="width:100px">Nơi đến</th>
+                        <th data-sort-ignore="false" data-type="date" class="text-center" style="width:100px">Ngày bay</th>
+                        <th data-sort-ignore="false" data-type="alpha" class="text-center" style="width:100px">Hạng ghế</th>
+                        <th data-sort-ignore="false" data-type="alpha" class="text-center" style="width:100px">Mức giá</th>
+                        <th data-sort-ignore="false" data-type="numeric" class="text-center" style="width:100px">Số lượng ghế</th>
+                        <th data-sort-ignore="false" data-type="numeric" class="text-center" style="width:100px">Giá vé (VND)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="search in hsDepart" on-finish-render="clearFilter()">
+                        <th style="text-align:center;vertical-align:middle" scope="row" ng-bind="$index+1"></th>
+                        <td>
+                            <a ng-click="getDetail(search)" ng-bind="search.FlightID" href="javascript:void(0);"></a>
+                        </td>
+                        <td ng-bind="search.Origin"></td>
+                        <td ng-bind="search.Destination"></td>
+                        <td ng-bind="search.FlightTime | date:'yyyy-MM-dd HH:mm:ss'"></td>
+                        <td ng-bind="search.SeatClass"></td>
+                        <td ng-bind="search.PriceClass"></td>
+                        <td class="text-right" ng-bind="search.TotalSeat | number:0"></td>
+                        <td class="text-right" ng-bind="search.Price | number:0"></td>
+                    </tr>
+                </tbody>
+
+                <tfoot ng-if="isNoFlight" on-finish-render="clearFilter()">
+                    <tr>
+                        <td colspan="16" align="center">
+                            <div class="alert alert-danger" role="alert">
+                                <span ng-bind="MessageNoFlight"></span>
+                            </div>
+                        </td>
+                    </tr>
+                </tfoot>
+                <tfoot class="hide-if-no-paging" ng-if="hsDepart">
+                    <tr>
+                        <td colspan="16" align="left">
+                            <ul class="pagination"></ul>
+                        </td>
+                    </tr>
+                </tfoot>
+
+            </table>
+        </div>
+    </div>
+
+
+    <div class="row" ng-if="isSearch">
+        <div class="col-md-12">
+            <p>
+                <b>&nbsp;&nbsp;Kết quả tìm kiếm chuyến bay:</b>&nbsp;<span ng-bind="getStationName(SearchRequest.AirPortDestination)"></span> - <span ng-bind="getStationName(SearchRequest.AirPortOrigin)"></span>
+                <b>&nbsp;&nbsp;&nbsp;&nbsp;</b>&nbsp;&nbsp;Lượt về: <span ng-hide="OneWayTick" ng-bind="SearchRequest.ReturnDate | date: 'dd/MM/yyyy'"></span>
+            </p>
+            <table class="table footable table-striped table-hover table-bordered" data-page-size="5">
+                <thead>
+                    <tr style="background-color:#f5f5f5">
+                        <th data-sort-ignore="false" data-type="numeric" data-sort-initial="true" class="text-center" style="width:5px">STT</th>
+                        <th data-sort-ignore="false" data-type="alpha" class="text-center" style="width:100px">Mã chuyến bay</th>
+                        <th data-sort-ignore="false" data-type="alpha" class="text-center v-m" style="width:100px">Nơi đi</th>
+                        <th data-sort-ignore="false" data-type="alpha" class="text-center v-m" style="width:100px">Nơi đến</th>
+                        <th data-sort-ignore="false" data-type="date" class="text-center" style="width:100px">Ngày bay</th>
+                        <th data-sort-ignore="false" data-type="alpha" class="text-center" style="width:100px">Hạng ghế</th>
+                        <th data-sort-ignore="false" data-type="alpha" class="text-center" style="width:100px">Mức giá</th>
+                        <th data-sort-ignore="false" data-type="numeric" class="text-center" style="width:100px">Số lượng ghế</th>
+                        <th data-sort-ignore="false" data-type="numeric" class="text-center" style="width:100px">Giá vé (VND)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="search in hsReturn" on-finish-render="clearFilter()">
+                        <th style="text-align:center;vertical-align:middle" scope="row" ng-bind="$index+1"></th>
+                        <td>
+                            <a ng-click="getDetail(search)" ng-bind="search.FlightID" href="javascript:void(0);"></a>
+                        </td>
+                        <td ng-bind="search.Origin"></td>
+                        <td ng-bind="search.Destination"></td>
+                        <td ng-bind="search.FlightTime | date:'yyyy-MM-dd HH:mm:ss'"></td>
+                        <td ng-bind="search.SeatClass"></td>
+                        <td ng-bind="search.PriceClass"></td>
+                        <td class="text-right" ng-bind="search.TotalSeat | number:0"></td>
+                        <td class="text-right" ng-bind="search.Price | number:0"></td>
+                    </tr>
+                </tbody>
+
+                <tfoot ng-if="isNoFlight" on-finish-render="clearFilter()">
+                    <tr>
+                        <td colspan="16" align="center">
+                            <div class="alert alert-danger" role="alert">
+                                <span ng-bind="MessageNoFlightRet"></span>
+                            </div>
+                        </td>
+                    </tr>
+                </tfoot>
+                <tfoot class="hide-if-no-paging" ng-if="hsReturn">
+                    <tr>
+                        <td colspan="16" align="left">
+                            <ul class="pagination"></ul>
+                        </td>
+                    </tr>
+                </tfoot>
+
+            </table>
+        </div>
+    </div>
+</body>
+</html>

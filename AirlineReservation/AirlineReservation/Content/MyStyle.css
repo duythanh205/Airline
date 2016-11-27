@@ -1,0 +1,118 @@
+﻿body {
+    color: #65696e;
+    font-family: Panton;
+    font-size: 16px;
+    line-height: 1.6em;
+    margin: 0;
+    font-weight: 400;
+    letter-spacing: .3px;
+}
+
+#homepage_video {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    height: 680px;
+}
+
+.show-onload {
+    opacity: 0;
+    transition: opacity .4s;
+}
+
+#homepage_video .video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
+.banner-content {
+    position: absolute;
+    text-align: center;
+    top: 50%;
+    right: 0;
+    left: 0;
+    transform: translate(0,-50%);
+    z-index: 1;
+}
+
+h1.refrigerator {
+    font-weight: 400;
+    font-size: 46px;
+    letter-spacing: 2.5px;
+    color: #6e757f;
+}
+
+.sidebar-menu {
+    position: absolute;
+    height: 70px;
+    right: 0;
+    top: 0;
+}
+
+.OneWayBtn {
+  display: inline-block;
+  /*padding: 15px 25px;*/
+  font-size: 18px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  /*background-color: #4CAF50;*/
+  /*background-color:#fb0;*/
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 2px #999;
+}
+
+.OneWayBtn:active {
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+#passenger_selector .btn-circle {
+    margin-top: 6px;
+    position: relative;
+}
+
+.btn-circle {
+    font-family: FontAwesome;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    background: #fb0;
+    color: #fff;
+    border-radius: 50%;
+}
+
+button {
+    overflow: visible;
+    border: none;
+    border-radius: 0;
+}
+
+.input-number {
+    height: 45px;
+    width: 45px;
+    color: rgba(115,121,127,.7);
+    border: 1px solid #fff;
+    margin: 0 10px;
+    -webkit-appearance: none;
+}
+
+.form-control[readonly] {
+    cursor:default;
+    background:#f1efeb;
+}
+
+.form-control[disabled] {
+    cursor:not-allowed;
+    background:#989595;
+}
+
+.styled-select select {
+   background:#f1efeb;
+ }
